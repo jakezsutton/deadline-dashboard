@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deadline Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>Deadline Dashboard</h1>
+    <p>Track assignments, labs, and exams by urgency</p>
+  </header>
+
+  <main>
+    <!-- Add Deadline Form -->
+    <section class="form-section">
+      <h2>Add Deadline</h2>
+
+      <form id="deadline-form">
+        <input
+          type="text"
+          id="course-input"
+          placeholder="Course (e.g. CSC230)"
+          required
+        />
+
+        <input
+          type="text"
+          id="task-input"
+          placeholder="Task (e.g. Assignment 2)"
+          required
+        />
+
+        <input
+          type="date"
+          id="date-input"
+          required
+        />
+
+        <button>Add</button>
+      </form>
+    </section>
+
+    <!-- Deadlines List -->
+    <section class="list-section">
+      <h2>Upcoming Deadlines</h2>
+
+      <ul id="deadline-list">
+        <!-- note: added deadlines will go here --->
+      </ul>
+
+      <p id="empty-message">No deadlines yet &#x1F389</p>
+    </section>
+  </main>
+  
+</body>
+</html>

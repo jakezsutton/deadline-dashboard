@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  background-color: #1f2933;
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+
+header p {
+  margin-top: 8px;
+  color: #d1d5db;
+}
+
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0px 20px;
+}
+
+section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+form input {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+}
+
+form button {
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #1e40af;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.deadline-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.course {
+  font-weight: bold;
+}
+
+/* task urgencies */
+.overdue {
+  border-left: 4px solid #dc2626;
+  background-color: #fef2f2;
+}
+
+.urgent {
+  border-left: 4px solid #d97706;
+  background-color: #fffbeb;
+}
+
+.soon {
+  border-left: 4px solid #aed413;
+  background-color: #fefce8;
+}
+
+.normal {
+  border-left: 4px solid #2563eb;
+  background-color: #eff6ff;
+}
+
+#empty-message {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 15px;
+}
