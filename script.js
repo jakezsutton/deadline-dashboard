@@ -1,3 +1,11 @@
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+let deadlines = [];
+
+const form = document.getElementById('deadline-form');
+const list = document.getElementById('deadline-list');
+const emptyMessage = document.getElementById('empty-message');
+
 /**
  * Formats the course input into a standardized format.
  * Removes all whitespace and capitalizes the course code.
@@ -21,11 +29,73 @@ function formatCourseInput(course) {
     return course.toUpperCase();
 }
 
-let deadlines = [];
+/**
+ * Determines the urgency of a deadline based on today's date.   
+ * 
+ * @param {string} date - Deadline date in 'YYYY-MM-DD' format.
+ * @param {boolean} completed - Whether the task is completed.
+ * @returns {string} One of: 'overdue', 'urgent', 'soon', 'normal', 'completed'.
+ */
+function getUrgency(date, completed) {
+    if (completed) return 'completed';
 
-const form = document.getElementById('deadline-form');
-const list = document.getElementById('deadline-list');
-const emptyMessage = document.getElementById('empty-message');
+    const today = new Date();
+    const deadlineDate = new Date(date);
+    const diff = (deadlineDate - today) / MS_PER_DAY;
+
+    if (diff < 0) return 'overdue';
+    if (diff <= 3) return 'urgent';
+    if (diff <= 7) return 'soon';
+    return 'normal';
+}
+
+function renderDeadlines() {
+    // clear existing list
+    list.innerHTML = '';
+
+    // show or hide the empty message
+    emptyMessage.style.display = deadlines.length === 0 ? 'block' : 'none';
+
+    deadlines.forEach((deadline, index) => {
+        const li = document.createElement('li');
+        li.className = 'deadline-item';
+
+        // determine urgency
+        const urgency = getUrgency(deadline.deadline, deadline.completed);
+        li.classList.add(urgency);
+
+        // left: course (bold) + task
+        const left = document.createElement('div');
+        left.className = 'deadline-left';
+
+        const courseElem = document.createElement('span');
+        courseElem.className = 'course';
+        courseElem.textContent = deadline.course;
+
+        const taskElem = document.createElement('span');
+        taskElem.className = 'task';
+        taskElem.textContent = deadline.task;
+        taskElem.style.display = 'block';
+
+        left.appendChild(courseElem);
+        left.appendChild(taskElem);
+
+        // right: date and icons for edit, delete, and mark complete
+        const right = document.createElement('div');
+        right.className = 'deadline-right';
+
+        const dateElem = document.createElement('span');
+        dateElem.className = 'deadline-date';
+        dateElem.textContent = deadline.deadline;
+
+        right.appendChild(dateElem);
+
+        li.appendChild(left);
+        li.appendChild(right);
+
+        list.appendChild(li);
+    });
+}
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -46,3 +116,4 @@ form.addEventListener('submit', function(e) {
     renderDeadlines();
     form.reset();
 });
+

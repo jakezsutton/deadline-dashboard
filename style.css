@@ -83,26 +83,39 @@ ul {
 
 .course {
   font-weight: bold;
+  font-size: 16px;
+}
+
+.task {
+  font-weight: normal;
+  font-size: 14px;
+  color: #333;
+}
+
+.deadline-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* task urgencies */
 .overdue {
-  border-left: 4px solid #dc2626;
+  border-left: 8px solid #dc2626;
   background-color: #fef2f2;
 }
 
 .urgent {
-  border-left: 4px solid #d97706;
-  background-color: #fffbeb;
+  border-left: 8px solid #d97706;
+  background-color: #fff3eb;
 }
 
 .soon {
-  border-left: 4px solid #aed413;
+  border-left: 8px solid #f4f41f;
   background-color: #fefce8;
 }
 
 .normal {
-  border-left: 4px solid #2563eb;
+  border-left: 8px solid #2563eb;
   background-color: #eff6ff;
 }
 
