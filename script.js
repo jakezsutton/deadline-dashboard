@@ -1,10 +1,12 @@
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-let deadlines = [];
+let deadlines = JSON.parse(localStorage.getItem('deadlines')) || [];
 
 const form = document.getElementById('deadline-form');
 const list = document.getElementById('deadline-list');
 const emptyMessage = document.getElementById('empty-message');
+
+renderDeadlines();
 
 /**
  * Formats the course input into a standardized format.
@@ -41,6 +43,11 @@ function getUrgency(date, completed) {
 
     const today = new Date();
     const deadlineDate = new Date(date);
+
+    // set to local time for accurate urgency
+    today.setHours(0, 0, 0, 0);
+    deadlineDate.setHours(0, 0, 0, 0);
+    
     const diff = (deadlineDate - today) / MS_PER_DAY;
 
     if (diff < 0) return 'overdue';
@@ -112,6 +119,7 @@ form.addEventListener('submit', function(e) {
     }
 
     deadlines.push(newDeadline);
+    localStorage.setItem('deadlines', JSON.stringify(deadlines));
 
     renderDeadlines();
     form.reset();
