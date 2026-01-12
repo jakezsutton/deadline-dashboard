@@ -79,6 +79,21 @@ ul {
   margin-bottom: 10px;
   font-size: 14px;
   color: #111827;
+  gap: 24px;
+}
+
+.deadline-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.deadline-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .course {
@@ -90,6 +105,13 @@ ul {
   font-weight: normal;
   font-size: 14px;
   color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.deadline-date {
+    font-weight: bold;
+    margin-right: 12px;
 }
 
 .deadline-right {
@@ -117,6 +139,36 @@ ul {
 .normal {
   border-left: 8px solid #2563eb;
   background-color: #eff6ff;
+}
+
+.completed {
+    border-left: 8px solid #0daa0d;
+    background-color: #cbfdcd;
+}
+
+.completed .course,
+.completed .task,
+.completed .deadline-date {
+    text-decoration: line-through;
+    color: #6b7280;
+}
+
+.icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+}
+
+.icon.delete svg {
+    stroke: #dc2626;
+}
+
+.icon.edit svg {
+    stroke: #2563eb;
+}
+
+.icon.complete svg {
+    stroke: green;
 }
 
 #empty-message {
