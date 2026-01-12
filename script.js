@@ -60,9 +60,9 @@ function getUrgency(date, completed) {
  * Creates an inline SVG icon from Heroicons.com with click handler
  * 
  * @param {string} type - 'delete', 'edit', or 'complete'
- * @param {function} onClick - callback for when the icon is clicked
- * @param {boolean} completed - for toggle between 'Mark Complete' and 'Mark Uncomplete'
- * @returns {HTMLElement} span containing SVG icon for type
+ * @param {function} onClick - Callback for when the icon is clicked
+ * @param {boolean} completed - For toggle between 'Mark Complete' and 'Mark Uncomplete'
+ * @returns {HTMLElement} Span containing SVG icon for type
  */
 function createIcon(type, onClick, completed = false) {
     const span = document.createElement('span');
@@ -98,6 +98,95 @@ function createIcon(type, onClick, completed = false) {
 
     span.addEventListener('click', onClick);
     return span;
+}
+
+/**
+ * Shows an edit form for a given deadline directly below it
+ * 
+ * @param {HTMLElement} li - The <li> element representing the deadline.
+ * @param {object} deadline - The deadline object to edit.
+ */
+function showEditForm(li, deadline) {
+    // remove any other open edit forms first
+    const existingEdit = document.querySelector('.edit-form');
+    if (existingEdit) existingEdit.remove();
+
+    // disable all icons while editing
+    document.querySelectorAll('.deadline-right .icon').forEach(icon => {
+        icon.style.pointerEvents = 'none';
+        icon.style.opacity = '0.4';
+    });
+
+    const editDiv = document.createElement('div');
+    editDiv.className = 'edit-form';
+
+    const courseInput = document.createElement('input');
+    courseInput.type = 'text';
+    courseInput.value = deadline.course;
+    courseInput.className = 'edit-input course-input';
+    courseInput.required = true;
+
+    const taskInput = document.createElement('input');
+    taskInput.type = 'text';
+    taskInput.value = deadline.task;
+    taskInput.className = 'edit-input task-input';
+    taskInput.required = true;
+
+    const deadlineInput = document.createElement('input');
+    deadlineInput.type = 'date';
+    deadlineInput.value = deadline.deadline;
+    deadlineInput.className = 'edit-input date-input';
+    deadlineInput.required = true;
+
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
+    saveBtn.className = 'save-btn';
+
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.className = 'cancel-btn';
+
+    const errorMsg = document.createElement('div');
+    errorMsg.className = 'edit-error';
+
+    saveBtn.addEventListener('click', () => {
+        const newCourse = courseInput.value.trim();
+        const newTask = taskInput.value.trim();
+        const newDeadline = deadlineInput.value;
+
+        if (!newCourse || !newTask || !newDeadline) {
+            errorMsg.textContent = 'All fields are required!';
+            return;
+        }
+
+        errorMsg.textContent = '';
+
+        deadline.course = formatCourseInput(courseInput.value);
+        deadline.task = taskInput.value;
+        deadline.deadline = deadlineInput.value;
+
+        localStorage.setItem('deadlines', JSON.stringify(deadlines));
+        renderDeadlines();
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        editDiv.remove();
+        // re-enable all the icons
+        document.querySelectorAll('.deadline-right .icon').forEach(icon => {
+            icon.style.pointerEvents = '';
+            icon.style.opacity = '';
+        });
+    });
+
+    editDiv.appendChild(courseInput);
+    editDiv.appendChild(taskInput);
+    editDiv.appendChild(deadlineInput);
+    editDiv.appendChild(saveBtn);
+    editDiv.appendChild(cancelBtn);
+    editDiv.appendChild(errorMsg);
+
+    // properly show the edit form below the deadline
+    li.insertAdjacentElement('afterend', editDiv);
 }
 
 function renderDeadlines() {
@@ -148,9 +237,10 @@ function renderDeadlines() {
             renderDeadlines();
         }));
 
-        right.appendChild(createIcon('edit', () => {
+        const editIcon = createIcon('edit', () => showEditForm(li, deadline));
+        if (deadline.completed) editIcon.classList.add('disabled');
 
-        }));
+        right.appendChild(editIcon);
 
         right.appendChild(createIcon('complete', () => {
             // toggle completed
@@ -186,4 +276,3 @@ form.addEventListener('submit', function(e) {
     renderDeadlines();
     form.reset();
 });
-

@@ -153,6 +153,7 @@ ul {
     color: #6b7280;
 }
 
+/* task operation icons */
 .icon svg {
     width: 24px;
     height: 24px;
@@ -169,6 +170,80 @@ ul {
 
 .icon.complete svg {
     stroke: green;
+}
+
+.icon.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* edit form */
+.edit-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.edit-input {
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.course-input {
+    flex: 1;
+}
+
+.task-input {
+    flex: 2;
+}
+
+.date-input {
+    flex: 1;
+}
+
+/* buttons inside edit form */
+.save-btn,
+.cancel-btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.save-btn {
+    background-color: #2563eb;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #1e40af;
+}
+
+.cancel-btn {
+    background-color: #f3f4f6;
+    color: #111827;
+    border: 1px solid #d1d5db;
+}
+
+.cancel-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.edit-error {
+    display: block;
+    width: 100%;
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 4px;
+    text-align: center;
+    font-weight: 500;
 }
 
 #empty-message {
