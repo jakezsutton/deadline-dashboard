@@ -118,6 +118,7 @@ function showEditForm(li, deadline) {
         icon.style.opacity = '0.4';
     });
 
+    // create elements for editing
     const editDiv = document.createElement('div');
     editDiv.className = 'edit-form';
 
@@ -149,6 +150,17 @@ function showEditForm(li, deadline) {
 
     const errorMsg = document.createElement('div');
     errorMsg.className = 'edit-error';
+
+    // keyboard shortcuts for saving/cancelling
+    editDiv.addEventListener('keydown', (e) => {
+        if (e.key == 'Enter') {
+            e.preventDefault();
+            saveBtn.click();
+        } else if (e.key == 'Escape') {
+            e.preventDefault();
+            cancelBtn.click();
+        }
+    });
 
     saveBtn.addEventListener('click', () => {
         const newCourse = courseInput.value.trim();
@@ -188,6 +200,7 @@ function showEditForm(li, deadline) {
 
     // properly show the edit form below the deadline
     li.insertAdjacentElement('afterend', editDiv);
+    courseInput.focus();
 }
 
 /**
@@ -316,13 +329,6 @@ form.addEventListener('submit', function(e) {
 });
 
 toggleCompleted.addEventListener('change', (e) => {
-    const scrollY = window.scrollY;
-
-    e.target.blur();
-
+    e.preventDefault();
     renderDeadlines();
-
-    requestAnimationFrame(() => {
-        window.scrollTo(0, scrollY);
-    });
 });
