@@ -189,9 +189,29 @@ function showEditForm(li, deadline) {
     li.insertAdjacentElement('afterend', editDiv);
 }
 
+/**
+ * Sorts deadlines by due date.
+ * Uncompleted deadlines are sorted first followed by completed ones.
+ * Both groups are sorted by earliest due date.
+ * 
+ * @param {Array} deadlines - The list of deadlines to be sorted. 
+ */
+function sortDeadlines(deadlines) {
+    deadlines.sort((a, b) => {
+        if (a.completed !== b.completed) {
+            return a.completed - b.completed;
+        } else {
+            return new Date(a.deadline) - new Date(b.deadline);
+        }
+    });
+}
+
 function renderDeadlines() {
     // clear existing list
     list.innerHTML = '';
+
+    // sort the deadlines
+    sortDeadlines(deadlines);
 
     // show or hide the empty message
     emptyMessage.style.display = deadlines.length === 0 ? 'block' : 'none';
