@@ -5,6 +5,7 @@ let deadlines = JSON.parse(localStorage.getItem('deadlines')) || [];
 const form = document.getElementById('deadline-form');
 const list = document.getElementById('deadline-list');
 const emptyMessage = document.getElementById('empty-message');
+const toggleCompleted = document.getElementById('toggle-completed');
 
 renderDeadlines();
 
@@ -214,15 +215,32 @@ function renderDeadlines() {
     sortDeadlines(deadlines);
 
     // show or hide the empty message
-    emptyMessage.style.display = deadlines.length === 0 ? 'block' : 'none';
+    const hasUncompleted = deadlines.some(d => !d.completed);
+    emptyMessage.style.display = hasUncompleted ? 'none' : 'block';
+
+    // divider to separate completed tasks from uncompleted
+    let insertedDivider = false;
+
+    // determine whether to hide completed tasks
+    const hideCompleted = toggleCompleted.checked;
 
     deadlines.forEach((deadline, index) => {
         const li = document.createElement('li');
         li.className = 'deadline-item';
 
+        if (hideCompleted && deadline.completed) return;
+
         // determine urgency
         const urgency = getUrgency(deadline.deadline, deadline.completed);
         li.classList.add(urgency);
+
+        if (deadline.completed && !insertedDivider) {
+            const div = document.createElement('div');
+            div.className = 'completed-divider';
+            div.textContent = 'Completed Tasks'
+            list.appendChild(div);
+            insertedDivider = true;
+        }
 
         // left: course (bold) + task
         const left = document.createElement('div');
@@ -295,4 +313,16 @@ form.addEventListener('submit', function(e) {
 
     renderDeadlines();
     form.reset();
+});
+
+toggleCompleted.addEventListener('change', (e) => {
+    const scrollY = window.scrollY;
+
+    e.target.blur();
+
+    renderDeadlines();
+
+    requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+    });
 });

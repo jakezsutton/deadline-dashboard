@@ -45,13 +45,24 @@
 
     <!-- Deadlines List -->
     <section class="list-section">
-      <h2>Upcoming Deadlines</h2>
+      <div class="deadlines-header">
+        <div class="header-left">
+          <h2>Upcoming Deadlines</h2>
+        </div>
+
+        <div class="header-right">
+          <label class="toggle-completed">
+            <input type="checkbox" id="toggle-completed">Hide completed tasks
+          </label>
+        </div>
+      </div>
+
+      <p id="empty-message">No deadlines yet &#x1F389</p>
 
       <ul id="deadline-list">
         <!-- note: added deadlines will go here --->
       </ul>
 
-      <p id="empty-message">No deadlines yet &#x1F389</p>
     </section>
   </main>
   

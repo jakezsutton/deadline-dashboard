@@ -70,6 +70,26 @@ ul {
   margin: 0;
 }
 
+.deadlines-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    margin-bottom: 18px;
+}
+
 .deadline-item {
   display: flex;
   justify-content: space-between;
@@ -151,6 +171,34 @@ ul {
 .completed .deadline-date {
     text-decoration: line-through;
     color: #6b7280;
+}
+
+.completed-divider {
+    text-align: center;
+    font-weight: bold;
+    color: #6b7280;
+    margin: 20px 0 10px;
+    border-top: 1px solid #d1d5db;
+    padding-top: 6px;
+    font-size: 14px;
+}
+
+.toggle-completed {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #333;
+    margin-top: 2px;
+    opacity: 0.9;
+}
+
+.toggle-completed input {
+    margin-right: 6px;
+}
+
+.toggle-completed:hover {
+    opacity: 1;
 }
 
 /* task operation icons */
@@ -249,5 +297,5 @@ ul {
 #empty-message {
   text-align: center;
   color: #6b7280;
-  margin-top: 15px;
+  margin-top: 28px;
 }
