@@ -10,10 +10,10 @@ across sessions.
 
 - Add deadlines with course code, task description, and due date
 - Automatic urgency detection with colour-coded prioritization:
-    - `#dc2626` Overdue
-    - `#d97706` Urgent (< 3 days)
-    - `#f4f41f` Upcoming (3-7 days)
-    - `#2563eb` Normal (> 7 days)
+    - 🔴 Overdue
+    - 🟠 Urgent (< 3 days)
+    - 🟡 Upcoming (3-7 days)
+    - 🔵 Normal (> 7 days)
 - Sorts deadlines by due date, keeping the most important tasks at the top
 - Mark tasks as complete/uncomplete
 - Completed tasks grouped at the bottom, still sorted by date
@@ -36,20 +36,20 @@ GitHub Pages link: https://jakezsutton.github.io/deadline-dashboard/
 
 ## How to Use
 
-**1. Add a deadline**
-    - Enter a course code, task description, and due date, then click 'Add'
-**2. View deadlines**
-    - Tasks are automatically sorted by due date
-    - Colour indicates urgency at a glance
-**3. Edit a deadline**
-    - Click the edit (pencil) icon
-    - Modify fields inline
-    - Save (enter) or cancel (escape) changes
-**4. Mark complete**
-    - Click the mark complete (check) icon to toggle completion
-    - Completed tasks move to the bottom, still sorted
-**5. Hide completed tasks**
-    - Use the checkbox next to _Upcoming Deadlines_
+**1. Add a deadline**  
+    - Enter a course code, task description, and due date, then click 'Add'  
+**2. View deadlines**  
+    - Tasks are automatically sorted by due date  
+    - Colour indicates urgency at a glance  
+**3. Edit a deadline**  
+    - Click the edit (pencil) icon  
+    - Modify fields inline  
+    - Save (enter) or cancel (escape) changes  
+**4. Mark complete**  
+    - Click the mark complete (check) icon to toggle completion  
+    - Completed tasks move to the bottom, still sorted  
+**5. Hide completed tasks**  
+    - Use the checkbox next to _Upcoming Deadlines_  
 
 ## Learning Objectives & Takeaways
 
@@ -84,5 +84,5 @@ This project was built to strengthen front-end skills using basic HTML, CSS, and
 
 ## Author
 
-**Jake Sutton**
+**Jake Sutton**  
 Software Engineering Student
